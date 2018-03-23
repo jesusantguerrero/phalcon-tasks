@@ -1,1 +1,9 @@
-<?php echo "<h1> Hello!</h1>";
+<?php
+	echo "<h1> Hello Phalcon!</h1>";
+	echo PHP_EOL;
+	echo PHP_EOL;
+
+	echo $this->tag->linkTo(
+		"user/signup",
+		"sign Up Here"
+	);

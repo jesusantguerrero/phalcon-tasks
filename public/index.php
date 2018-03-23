@@ -4,6 +4,8 @@
 	use Phalcon\Mvc\Application;
 	use Phalcon\Di\FactoryDefault;
 	use Phalcon\Mvc\Url as UrlProvider;
+	use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
+	use config\database\config;
 
 	// Define some absolute path constants to aid in locating resources
 	define('BASE_PATH', dirname(__DIR__));
@@ -34,6 +36,7 @@
 	);
 
 	// setting url
+
 	$di->set(
 		'url',
 		function() {
@@ -43,12 +46,25 @@
 		}
 	);
 
+	$di->set(
+		'db',
+		function () {
+			return new DbAdapter(
+					[
+							'host'     => '127.0.0.1',
+							'username' => 'jguerrero',
+							'password' => '',
+							'dbname'   => 'phalcon_tutorial',
+					]
+			);
+		}
+	);
+
 	$application = new Application($di);
 
 	try {
 		$response = $application->handle();
 		$response->send();
 	} catch (\Exception $e) {
-		// var_dump(new Application($di));
 		echo 'Exception: ', $e->getMessage();
 	}
