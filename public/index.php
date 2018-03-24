@@ -5,7 +5,6 @@
 	use Phalcon\Di\FactoryDefault;
 	use Phalcon\Mvc\Url as UrlProvider;
 	use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
-	use config\database\config;
 
 	// Define some absolute path constants to aid in locating resources
 	define('BASE_PATH', dirname(__DIR__));
@@ -20,6 +19,11 @@
 			]
 		);
 
+	$loader->registerNamespaces(
+		[
+			'App\Config' => APP_PATH . '/config/'
+		]
+	);
 
 	$loader->register();
 
