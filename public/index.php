@@ -26,7 +26,6 @@
 	);
 
 	$loader->register();
-
 	$di = new FactoryDefault();
 
 	// setting views
@@ -64,11 +63,22 @@
 		}
 	);
 
-	$application = new Application($di);
 
 	try {
+		$application = new Application($di);
 		$response = $application->handle();
 		$response->send();
-	} catch (\Exception $e) {
-		echo 'Exception: ', $e->getMessage();
-	}
+	} catch (Exception $e) {
+    echo '<pre>';
+    echo get_class($e), ": ", $e->getMessage(), "\n";
+    echo " File=", $e->getFile(), "\n";
+    echo " Line=", $e->getLine(), "\n";
+    echo $e->getTraceAsString();
+    echo '</pre>';
+    //echo $e->getMessage();
+} catch (PDOException $e) {
+    echo '<pre>';
+    var_dump($e);
+    echo '</pre>';
+    //echo $e->getMessage();
+}

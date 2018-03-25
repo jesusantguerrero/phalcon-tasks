@@ -3,10 +3,9 @@
 
 	class TaskController extends Controller {
 		public function indexAction() {
-			$Task = new Task();
-
-			$this->view->disable();
-
+			$tasks = Tasks::find();
+			$this->view->tasks = $tasks;
 		}
+
 
 	}

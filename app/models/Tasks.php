@@ -1,10 +1,10 @@
 <?php
 use Phalcon\Mvc\Model;
 
-class Task extends Model {
+class Tasks extends Model {
 	public $id;
 	public $name;
-	public $done;
+	public $state;
 	public $created;
 	public $updated;
 }
