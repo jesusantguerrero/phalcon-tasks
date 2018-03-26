@@ -4,7 +4,37 @@
 	class TaskController extends Controller {
 		public function indexAction() {
 			$tasks = Tasks::find();
-			$this->view->tasks = $tasks;
+			echo json_encode($tasks);
+			$this->view->disable();
+		}
+
+		public function create() {
+			{
+				$task = new Tasks();
+				$success = $task->save(
+					$this->request->getPost(),
+					[
+						"name",
+						"state",
+					]
+				);
+
+				if ($success) {
+					echo json_encode[(['success' => 'saved'])];
+				} else {
+					echo json_encode(['error' => json_encode($task->getMessages())]);
+				}
+				$this->view->disable();
+			}
+		}
+
+		public function delete($id) {
+			if ($id) {
+				$task = Tasks::find("id='$id'");
+				$success = $task->delete();
+				echo $success;
+			}
+			$this->view->disable();
 		}
 
 
